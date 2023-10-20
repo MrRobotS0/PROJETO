@@ -1,4 +1,5 @@
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Projeto.Repositories.Interfaces;
 using PROJETO.Models;
@@ -6,6 +7,7 @@ using PROJETO.VewModel;
 
 namespace PROJETO.Controllers
 {
+    [Authorize]
     public class CarrinhoController : Controller
     {
         private readonly Carrinho _carrinho;
