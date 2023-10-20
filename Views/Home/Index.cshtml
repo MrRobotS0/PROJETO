@@ -2,9 +2,12 @@
 @{
     ViewData["Title"] = "Itens";
 }
-<partial name="_Carousel" />
-<h1>Itens em Destaque</h1>
-<div class="row">
+
+    <partial name="_Carousel" />
+
+
+<h1 class="text-white text-center">LANCHES ESPECIAIS</h1>
+<div class="row row-cols-lg-3 g-3 ">
     @foreach (var item in Model.ItensEmDestaque)
     {
         <partial name="_Card" for="@item"></partial>

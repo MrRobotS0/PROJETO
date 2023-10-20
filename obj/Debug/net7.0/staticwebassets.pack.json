@@ -13,6 +13,30 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\dev\\PROJETO\\wwwroot\\imagens\\1.png",
+      "PackagePath": "staticwebassets\\imagens\\1.png"
+    },
+    {
+      "Id": "C:\\dev\\PROJETO\\wwwroot\\imagens\\ham1.jpg",
+      "PackagePath": "staticwebassets\\imagens\\ham1.jpg"
+    },
+    {
+      "Id": "C:\\dev\\PROJETO\\wwwroot\\imagens\\ham2.jpg",
+      "PackagePath": "staticwebassets\\imagens\\ham2.jpg"
+    },
+    {
+      "Id": "C:\\dev\\PROJETO\\wwwroot\\imagens\\ham3.jpeg",
+      "PackagePath": "staticwebassets\\imagens\\ham3.jpeg"
+    },
+    {
+      "Id": "C:\\dev\\PROJETO\\wwwroot\\imagens\\ham4.jpg",
+      "PackagePath": "staticwebassets\\imagens\\ham4.jpg"
+    },
+    {
+      "Id": "C:\\dev\\PROJETO\\wwwroot\\imagens\\ham5.jpg",
+      "PackagePath": "staticwebassets\\imagens\\ham5.jpg"
+    },
+    {
       "Id": "C:\\dev\\PROJETO\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

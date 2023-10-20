@@ -16,7 +16,16 @@ html {
   position: relative;
   min-height: 100%;
 }
+ 
 
-body {
-  margin-bottom: 60px;
+.minhacor {
+  background-color: #7A0606;
+}
+
+.minhacorr {
+  background-color: #9C6604;
+}
+
+a{
+  text-decoration: none;
 }
