@@ -30,21 +30,18 @@ namespace PROJETO.Controllers
 
                 categoriaAtual = categoria;
             }
-            var itemListViewMovel = new ItemListViewModel
+            var itemListViewModel = new ItemListViewModel
             {
                 Itens = itens,
                 CategoriaAtual = categoriaAtual
             };
-            return View(itemListViewMovel);
+            return View(itemListViewModel);
         }
         public IActionResult Detail(int itemId)
         {
 
-            var movel = _itemRespository.Itens.FirstOrDefault(m =>
-
-            m.ItemId == itemId);
-
-            return View(movel);
+            var item = _itemRespository.Itens.FirstOrDefault(m =>m.ItemId == itemId);
+            return View(item);
         }
 
         public IActionResult Search(string searchString)

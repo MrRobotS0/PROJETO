@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PROJETO.Models;
 using Projeto.Context;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PROJETO.Areas.Admin.Controllers
 {
+    [Authorize(Roles="Admin")]
     [Area("Admin")]
     public class AdminItemController : Controller
     {
