@@ -1,12 +1,12 @@
-<div class="col">
+<div class="col mt-3">
 <div class="card text-white minhacor text-center h-100 rounded-3">
-            <img src="@Model.ImagemPequenaUrl" class="card-img-top" alt="...">
+            <img src="~/@Model.ImagemPequenaUrl" class="card-img-top" alt="...">
             <div class="card-body border-radius">
                 <h5 class="card-title"> <a asp-controller="Item" asp-action="Details" asp-route-movelId="@Model.ItemId">@Model.Nome</a></h5>
                 <p class="card-text">@Model.DescricaoCurta</p>
                 <h6 class="card-subtitle">Preço: @Model.Preco.ToString("c")</h6>
                 <a class="btn minhacorr text-white" id="cartButton" asp-controller="Carrinho"
-                asp-action="AdicionarItemNoCarrinhoCompra" asp-route-movelId="@Model.ItemId">
+                asp-action="AdicionarItemNoCarrinhoCompra" asp-route-itemId="@Model.ItemId">
                 ADIONAR AO CARRINHO
             </a>
             </div>

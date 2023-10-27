@@ -17,6 +17,30 @@
       "PackagePath": "staticwebassets\\imagens\\1.png"
     },
     {
+      "Id": "C:\\dev\\PROJETO\\wwwroot\\imagens\\card1.png",
+      "PackagePath": "staticwebassets\\imagens\\card1.png"
+    },
+    {
+      "Id": "C:\\dev\\PROJETO\\wwwroot\\imagens\\card2.png",
+      "PackagePath": "staticwebassets\\imagens\\card2.png"
+    },
+    {
+      "Id": "C:\\dev\\PROJETO\\wwwroot\\imagens\\card3.png",
+      "PackagePath": "staticwebassets\\imagens\\card3.png"
+    },
+    {
+      "Id": "C:\\dev\\PROJETO\\wwwroot\\imagens\\card4.png",
+      "PackagePath": "staticwebassets\\imagens\\card4.png"
+    },
+    {
+      "Id": "C:\\dev\\PROJETO\\wwwroot\\imagens\\card5.png",
+      "PackagePath": "staticwebassets\\imagens\\card5.png"
+    },
+    {
+      "Id": "C:\\dev\\PROJETO\\wwwroot\\imagens\\card6.png",
+      "PackagePath": "staticwebassets\\imagens\\card6.png"
+    },
+    {
       "Id": "C:\\dev\\PROJETO\\wwwroot\\imagens\\ham1.jpg",
       "PackagePath": "staticwebassets\\imagens\\ham1.jpg"
     },

@@ -4,7 +4,7 @@
 }
 <h1>@Model.CategoriaAtual</h1>
 <div class="container">
-    <div class="row">
+    <div class="row row-cols-sm-3 row-cols-1">
         @foreach (var item in Model.Itens)
         {
             <partial name="_Card" for="@item"></partial>
