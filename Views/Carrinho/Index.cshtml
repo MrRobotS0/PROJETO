@@ -1,18 +1,16 @@
 @model CarrinhoViewModel
-<div class="Container">
+<div class="container bg-white p-4 mt-4 rounded shadow">
     <div class="row checkoutForm">
         <div>
-            <img src="~/images/Full-Cart-icon.png" width="30" height="35" />
-            <h4>Seu carrinho de
-                compras : </h4>
+            <h4 class="text-center"><i class="bi bi-cart"></i> SEU CARRINHO DE COMPRAS <i class="bi bi-cart"></i> </h4>
         </div>
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Quantidade</th>
-                    <th>Item</th>
-                    <th class="text-right">Preço</th>
-                    <th class="text-right">Subtotal</th>
+                    <th>QUANTIDADE</th>
+                    <th>ITEM</th>
+                    <th class="text-right">PREÇO</th>
+                    <th class="text-right">SUBTOTAL</th>
                     <th></th>
                 </tr>
             </thead>
@@ -27,14 +25,16 @@
                             @((item.Quantidade * item.Item.Preco).ToString("c"))
                         </td>
                         <td class="text-center">
-                            <a asp-controller="Carrinho" asp-action="RemoverCarrinho" asp-route-itemId="@item.Item.ItemId"><img src="~/images/remover.png" width="20px" height="20px" /></a>
+                            <a asp-controller="Carrinho" asp-action="RemoverCarrinho" asp-route-itemId="@item.Item.ItemId">
+                                <i class="bi bi-trash3"></i>
+                            </a>
                         </td>
                     </tr>
                 }
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3" class="text-right">Total:</td>
+                    <td colspan="3" class="text-right"><h5>TOTAL:</h5></td>
                     <td class="text-right">
                         @Model.CarrinhoTotal.ToString("c")
                     </td>
@@ -43,13 +43,11 @@
         </table>
 
         <div class="text-right">
-            <div class="btn-group">
-                <a class="btn btn-success" asp-controller="Pedido" asp-action="Checkout">Encerrar
-                    Pedido</a>
+            <div class="btn-group d-flex justify-content-center">
+                <a class="btn btn-danger rounded-pill" asp-controller="Pedido" asp-action="Checkout">ENCERRAR PEDIDO</a>
 
                 &nbsp;&nbsp;&nbsp;
-                <a class="btn btn-primary" asp-controller="Item" asp-action="List">Continuar
-                    Comprando</a>
+                <a class="btn btn-danger rounded-pill" asp-controller="Item" asp-action="List">CONTINUAR COMPRANDO</a>
             </div>
         </div>
         <br />

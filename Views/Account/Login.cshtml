@@ -1,37 +1,33 @@
 @model LoginViewModel
-<table class="table">
-    <tr>
-        <td><img src="~/images/login1.jpg" class="img-fluid" asp-append-version="true" alt="Fazer o Login" /></td>
-        <td>
-            <div class="row">
-                <div class="col-9 col-md-9 col-lg-9">
-                    <h4>Login</h4>
-                    <form asp-controller="Account" asp-action="Login" method="post" class="form-horizontal" role="form">
-                        <hr />
-                        <div asp-validation-summary="All" class="text-danger"></div>
-                        <input type="hidden" asp-for="ReturnUrl" />
-                        <div class="form-group">
-                            <label asp-for="UserName" class="col-md-2 control-label"></label>
-                            <div class="col-md-6">
-                                <input asp-for="UserName" class="form-control" />
-                                <span asp-validation-for="UserName" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Password" class="col-md-2 control-label"></label>
-                            <div class="col-md-6">
-                                <input asp-for="Password" class="form-control" />
-                                <span asp-validation-for="Password" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-8 mt-2">
-                                <input type="submit" class="btn btn-success" value="Log in" />
-                            </div>
-                        </div>
-                    </form>
+
+<div class="container-fluid d-flex p-4 text-white justify-content-center">
+
+    <div class="col-10 shadow-lg p-5 rounded rounded-3">
+        <h4 class="text-center">LOGIN</h4>
+        <i class="bi bi-person-circle d-flex justify-content-center h2"></i>
+        <form asp-controller="Account" asp-action="Login" method="post" class="form-horizontal" role="form">
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" asp-for="ReturnUrl" />
+            <div class="form-group mt-3">
+                <label asp-for="UserName" class="control-label"></label>
+                <div class="">
+                    <input asp-for="UserName" class="form-control rounded-pill shadow-lg" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
                 </div>
             </div>
-        </td>
-    </tr>
-</table>
+            <div class="form-group mt-3">
+                <label asp-for="Password" class="col-md-2 control-label"></label>
+                <div class="">
+                    <input asp-for="Password" class="form-control rounded-pill shadow-lg" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <div class="d-flex justify-content-center">
+                    <input type="submit" class="minhacor text-white rounded-pill p-2" value="LOGIN" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
