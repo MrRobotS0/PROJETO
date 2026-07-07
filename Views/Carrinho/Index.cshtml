@@ -1,55 +1,71 @@
 @model CarrinhoViewModel
-<div class="container bg-white p-4 mt-4 rounded shadow">
-    <div class="row checkoutForm">
-        <div>
-            <h4 class="text-center"><i class="bi bi-cart"></i> SEU CARRINHO DE COMPRAS <i class="bi bi-cart"></i> </h4>
-        </div>
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>QUANTIDADE</th>
-                    <th>ITEM</th>
-                    <th class="text-right">PREÇO</th>
-                    <th class="text-right">SUBTOTAL</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Carrinho.CarrinhoItens)
-                {
+@{
+    ViewData["Title"] = "Meu carrinho";
+    var itens = Model?.Carrinho?.CarrinhoItens;
+}
+
+<div class="panel">
+    <h1 class="panel-title mb-4"><i class="bi bi-bag me-2" aria-hidden="true"></i>Seu carrinho</h1>
+
+    @if (itens != null && itens.Count > 0)
+    {
+        <div class="table-responsive">
+            <table class="cart-table">
+                <thead>
                     <tr>
-                        <td class="text-center">@item.Quantidade</td>
-                        <td class="text-left">@item.Item.Nome</td>
-                        <td class="text-right">@item.Item.Preco.ToString("c")</td>
-                        <td class="text-right">
-                            @((item.Quantidade * item.Item.Preco).ToString("c"))
-                        </td>
-                        <td class="text-center">
-                            <a asp-controller="Carrinho" asp-action="RemoverCarrinho" asp-route-itemId="@item.Item.ItemId">
-                                <i class="bi bi-trash3"></i>
-                            </a>
-                        </td>
+                        <th>Qtd.</th>
+                        <th>Item</th>
+                        <th class="num">Preço</th>
+                        <th class="num">Subtotal</th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="3" class="text-right"><h5>TOTAL:</h5></td>
-                    <td class="text-right">
-                        @Model.CarrinhoTotal.ToString("c")
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
-
-        <div class="text-right">
-            <div class="btn-group d-flex justify-content-center">
-                <a class="btn btn-danger rounded-pill" asp-controller="Pedido" asp-action="Checkout">ENCERRAR PEDIDO</a>
-
-                &nbsp;&nbsp;&nbsp;
-                <a class="btn btn-danger rounded-pill" asp-controller="Item" asp-action="List">CONTINUAR COMPRANDO</a>
-            </div>
+                </thead>
+                <tbody>
+                    @foreach (var item in itens)
+                    {
+                        <tr>
+                            <td><span class="qty-pill">@item.Quantidade</span></td>
+                            <td class="fw-semibold">@item.Item.Nome</td>
+                            <td class="num">@item.Item.Preco.ToString("C")</td>
+                            <td class="num">@((item.Quantidade * item.Item.Preco).ToString("C"))</td>
+                            <td class="num">
+                                <a class="icon-btn" asp-controller="Carrinho" asp-action="RemoverCarrinho"
+                                   asp-route-itemId="@item.Item.ItemId" aria-label="Remover @item.Item.Nome do carrinho"
+                                   title="Remover um">
+                                    <i class="bi bi-dash-lg" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="num">Total</td>
+                        <td class="num"><span class="cart-total">@Model.CarrinhoTotal.ToString("C")</span></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
-        <br />
-    </div>
+
+        <div class="d-flex justify-content-end gap-2 mt-4 flex-wrap">
+            <a class="btn-brand-outline" asp-controller="Item" asp-action="List">
+                <i class="bi bi-arrow-left" aria-hidden="true"></i> Continuar comprando
+            </a>
+            <a class="btn-brand" asp-controller="Pedido" asp-action="Checkout">
+                Finalizar pedido <i class="bi bi-arrow-right" aria-hidden="true"></i>
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="empty-state">
+            <div class="ico"><i class="bi bi-bag-x" style="font-size:2rem" aria-hidden="true"></i></div>
+            <h3>Seu carrinho está vazio</h3>
+            <p>Que tal escolher um lanche pra começar?</p>
+            <a class="btn-brand mt-2" asp-controller="Item" asp-action="List">
+                <i class="bi bi-bag" aria-hidden="true"></i> Ver cardápio
+            </a>
+        </div>
+    }
 </div>

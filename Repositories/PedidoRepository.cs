@@ -21,6 +21,7 @@ namespace PROJETO.Repositories
             _context.Pedidos.Add(pedido);
             _context.SaveChanges();
             var carrinhoItens = _carrinho.CarrinhoItens;
+            pedido.PedidoItens = new System.Collections.Generic.List<PedidoItem>();
             foreach (var carI in carrinhoItens)
             {
                 var pm = new PedidoItem()
@@ -28,9 +29,11 @@ namespace PROJETO.Repositories
                     Quantidade = carI.Quantidade,
                     ItemId = carI.Item.ItemId,
                     PedidoId = pedido.PedidoId,
-                    Preco = Convert.ToDecimal(carI.Item.Preco)
+                    Preco = carI.Item.Preco,
+                    Item = carI.Item
                 };
                 _context.PedidoItens.Add(pm);
+                pedido.PedidoItens.Add(pm);
             }
             _context.SaveChanges();
         }

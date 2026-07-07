@@ -37,10 +37,13 @@ namespace PROJETO.Controllers
             };
             return View(itemListViewModel);
         }
-        public IActionResult Detail(int itemId)
+        public IActionResult Details(int id)
         {
-
-            var item = _itemRespository.Itens.FirstOrDefault(m =>m.ItemId == itemId);
+            var item = _itemRespository.Itens.FirstOrDefault(m => m.ItemId == id);
+            if (item == null)
+            {
+                return NotFound();
+            }
             return View(item);
         }
 
@@ -57,7 +60,8 @@ namespace PROJETO.Controllers
             else
             {
                 itens = _itemRespository.Itens.Where(m =>
-                m.Nome.ToLower() == searchString.ToLower()).OrderBy(m => m.Nome);
+                m.Nome.ToLower().Contains(searchString.ToLower())
+                || m.DescricaoCurta.ToLower().Contains(searchString.ToLower())).OrderBy(m => m.Nome);
 
                 if (itens.Any())
                 {

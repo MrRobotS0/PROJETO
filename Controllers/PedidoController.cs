@@ -22,7 +22,8 @@ namespace PROJETO.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Checkout(Pedido pedido)
+        [ValidateAntiForgeryToken]
+        public IActionResult Checkout([Bind("Nome,Endereco1,Endereco2,Numero,Bairro,Cep,Estado,Cidade,Telefone,Email")] Pedido pedido)
         {
             int totalItensPedido = 0;
             decimal precoTotalPedido = 0.0m;
@@ -32,7 +33,7 @@ namespace PROJETO.Controllers
             //verifica se existem itens de pedido
             if (_carrinho.CarrinhoItens.Count == 0)
             {
-                ModelState.AddModelError("", "Seu carrinho esta vazio, que tal incluir um lanche...");
+                ModelState.AddModelError("", "Seu carrinho está vazio. Que tal escolher um lanche primeiro?");
             }
             //calcula o total de itens e o total do pedido
             foreach (var item in items)

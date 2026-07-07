@@ -1,24 +1,48 @@
 @model Item
-<div class="container">
-<div class="row">
-<div class="card">
-<div class="text-center">
+@{
+    ViewData["Title"] = Model?.Nome ?? "Detalhe";
+}
 
-<img src="@Model.ImagemPequenaUrl" class="img-fluid" asp-append-version="true" alt="item">
+<nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Início</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Item" asp-action="List">Cardápio</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@Model.Nome</li>
+    </ol>
+</nav>
 
-</div>
-<div class="card-block">
-<h2 class="card-title">@Model.Nome</h2>
-<p class="card-text"><h5>@Model.DescricaoCurta</h5></p>
-<p class="btn btn-group align-content-lg-end" >
-<a asp-controller="Item" asp-action="List" class="btn btn-outline-info">Ver todos os móveis</a>
+<div class="panel">
+    <div class="row g-4 align-items-center">
+        <div class="col-md-6">
+            <div class="dish-card" style="cursor:default">
+                <div class="media" style="aspect-ratio:1/1">
+                    <img src="~/@Model.ImagemUrl" class="img-fluid" alt="@Model.Nome" asp-append-version="true" />
+                    <span class="price-chip">@Model.Preco.ToString("C")</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            @if (Model.Categoria != null)
+            {
+                <span class="cat-badge">@Model.Categoria.Nome</span>
+            }
+            <h1 class="section-display mt-2">@Model.Nome</h1>
+            <p class="lead" style="color:var(--ink-2)">@Model.DescricaoCurta</p>
+            <p style="color:var(--ink-2)">@Model.DescricaoDetalhada</p>
 
-<a class="btn btn-primary" id="cartButton" asp-controller="Carrinho" asp-action="AdicionarItemNoCarrinhoCompra" asp-route-itemId="@Model.ItemId">
+            <div class="d-flex align-items-center gap-3 my-3">
+                <span class="cart-total" style="color:var(--brand-red)">@Model.Preco.ToString("C")</span>
+            </div>
 
-Adicionar @Model.Nome ao carrinho
-</a>
-</p>
-</div>
-</div>
-</div>
+            <div class="d-flex gap-2 flex-wrap">
+                <a class="btn-brand btn-lg-cta" asp-controller="Carrinho" asp-action="AdicionarItemNoCarrinhoCompra"
+                   asp-route-itemId="@Model.ItemId">
+                    <i class="bi bi-bag-plus" aria-hidden="true"></i> Adicionar ao carrinho
+                </a>
+                <a class="btn-brand-outline btn-lg-cta" asp-controller="Item" asp-action="List">
+                    <i class="bi bi-arrow-left" aria-hidden="true"></i> Voltar ao cardápio
+                </a>
+            </div>
+        </div>
+    </div>
 </div>

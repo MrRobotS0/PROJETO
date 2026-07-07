@@ -97,18 +97,14 @@ namespace PROJETO.Models
             _context.CarrinhoItens.RemoveRange(carrinhoCompra);
             _context.SaveChanges();
         }
-        public double GetCarrinhoCompraTotal()
+        public decimal GetCarrinhoCompraTotal()
         {
-            List<double> total = _context.CarrinhoItens.Where(_c =>
-
-            _c.CarrinhoId == CarrinhoId).Select(c =>
-            c.Quantidade * c.Item.Preco).ToList();
-            double totalr = 0;
-            foreach (double t in total)
-            {
-                totalr = totalr + t;
-            }
-            return totalr;
+            // SQLite não suporta Sum() de decimal no servidor; agregamos no cliente com AsEnumerable().
+            return _context.CarrinhoItens
+                .Where(c => c.CarrinhoId == CarrinhoId)
+                .Select(c => c.Quantidade * c.Item.Preco)
+                .AsEnumerable()
+                .Sum();
         }
     }
 }

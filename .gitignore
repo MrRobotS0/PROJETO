@@ -1,0 +1,23 @@
+## .NET / ASP.NET Core
+bin/
+obj/
+out/
+
+## Rider / VS
+.vs/
+.idea/
+*.user
+*.suo
+
+## SQLite database (dados locais — não versionar)
+*.db
+*.db-shm
+*.db-wal
+*.db.bak_*
+
+## Segredos / config local
+appsettings.*.local.json
+secrets.json
+
+## Logs / temporários
+*.log

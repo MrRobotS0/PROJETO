@@ -1,23 +1,22 @@
+@model IEnumerable<Projeto.Models.Categoria>
 <div class="dropdown">
-    <a class="btn minhacorr dropdown-toggle text-white" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
-        aria-expanded="false">
-        Itens
+    <a class="nav-link dropdown-toggle" role="button" href="#" id="dropdownCategorias"
+       data-bs-toggle="dropdown" aria-expanded="false">
+        Categorias
     </a>
-    <ul class="dropdown-menu">
+    <ul class="dropdown-menu" aria-labelledby="dropdownCategorias">
         @foreach (var categoria in Model)
         {
             <li>
-
                 <a class="dropdown-item" asp-controller="Item" asp-action="List"
-                    asp-route-categoria="@categoria.Nome">@categoria.Nome</a>
-
+                   asp-route-categoria="@categoria.Nome">@categoria.Nome</a>
             </li>
         }
-        <li class="dropdown-divider"></li>
+        <li><hr class="dropdown-divider"></li>
         <li>
-
-            <a class="dropdown-item" asp-controller="Item" asp- action="List" asp-route-categoria=""
-                >Todos os Itens</a>
+            <a class="dropdown-item fw-semibold" asp-controller="Item" asp-action="List" asp-route-categoria="">
+                Todos os lanches
+            </a>
         </li>
     </ul>
 </div>

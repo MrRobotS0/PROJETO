@@ -1,6 +1,31 @@
 @{
-ViewData["Title"] = "Admin";
+    ViewData["Title"] = "Painel";
 }
-<div class="text-center">
-<h1 class="display-4">Administração</h1>
+
+<span class="eyebrow">Administração</span>
+<h1 class="section-display mt-2 mb-4">Painel <span class="accent">do restaurante</span></h1>
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <a class="panel d-block h-100 text-decoration-none" asp-area="Admin" asp-controller="AdminItem" asp-action="Index">
+            <div class="form-head text-start d-flex align-items-center gap-3">
+                <span class="ico m-0"><i class="bi bi-egg-fried" style="font-size:1.5rem" aria-hidden="true"></i></span>
+                <div>
+                    <h2 class="panel-title mb-0" style="font-size:1.6rem">Itens do cardápio</h2>
+                    <p class="text-muted mb-0">Cadastrar, editar e remover lanches</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6">
+        <a class="panel d-block h-100 text-decoration-none" asp-area="Admin" asp-controller="AdminCategoria" asp-action="Index">
+            <div class="form-head text-start d-flex align-items-center gap-3">
+                <span class="ico m-0"><i class="bi bi-tags" style="font-size:1.5rem" aria-hidden="true"></i></span>
+                <div>
+                    <h2 class="panel-title mb-0" style="font-size:1.6rem">Categorias</h2>
+                    <p class="text-muted mb-0">Organizar o cardápio por tipo</p>
+                </div>
+            </div>
+        </a>
+    </div>
 </div>

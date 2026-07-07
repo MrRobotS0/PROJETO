@@ -24,6 +24,7 @@ namespace PROJETO.Controllers
             });
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel loginVM)
         {
             if (!ModelState.IsValid)
@@ -31,7 +32,7 @@ namespace PROJETO.Controllers
             var user = await _userManager.FindByNameAsync(loginVM.UserName);
             if (user != null)
             {
-                var result = await _signManager.PasswordSignInAsync(user.UserName,loginVM.Password, false, false);
+                var result = await _signManager.PasswordSignInAsync(user.UserName, loginVM.Password, isPersistent: false, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
                     if (string.IsNullOrEmpty(loginVM.ReturnUrl))
@@ -71,7 +72,7 @@ namespace PROJETO.Controllers
                 var result = await _userManager.CreateAsync(user,registroVm.Password);
                 if (result.Succeeded)
                 {
-                    _userManager.AddToRoleAsync(user, "Member").Wait();
+                    await _userManager.AddToRoleAsync(user, "Member");
                     return RedirectToAction("Login", "Account");
                 }
                 else
@@ -81,10 +82,11 @@ namespace PROJETO.Controllers
             }
             return View(registroVm);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             HttpContext.Session.Clear();
-            HttpContext.User = null;
             await _signManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }

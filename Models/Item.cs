@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Projeto.Models;
 
 namespace PROJETO.Models
@@ -23,7 +24,9 @@ namespace PROJETO.Models
         public string DescricaoDetalhada {get; set;}
         [Display(Name = "Preço")]
         [Required(ErrorMessage ="Informe o preço")]
-        public double Preco {get; set;}
+        [Column(TypeName = "decimal(18,2)")]
+        [Range(0.01, 100000, ErrorMessage = "Informe um preço válido")]
+        public decimal Preco {get; set;}
         [Display(Name ="Imagem Pequena")]
         public string ImagemPequenaUrl {get; set;}
         [Display(Name ="Imagem Normal")]

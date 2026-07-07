@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 
 
 namespace PROJETO.Services
@@ -11,10 +12,12 @@ namespace PROJETO.Services
     {
         private readonly UserManager<UserAccount> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        public UserRoleInicial(UserManager<UserAccount> userManager, RoleManager<IdentityRole> roleManager)
+        private readonly IConfiguration _configuration;
+        public UserRoleInicial(UserManager<UserAccount> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _configuration = configuration;
         }
         public void SeedRoles()
         {
@@ -37,13 +40,24 @@ namespace PROJETO.Services
         }
         public void SeedUsers()
         {
-            if (_userManager.FindByEmailAsync("admin@localhost").Result == null)
+            // Credenciais do admin vêm da configuração (appsettings.Development.json / User Secrets / variáveis de ambiente),
+            // nunca hardcoded no código-fonte.
+            var email = _configuration["SeedAdmin:Email"];
+            var senha = _configuration["SeedAdmin:Password"];
+
+            // Sem senha configurada => não semeia o admin (evita criar usuário sem credencial definida).
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(senha))
+            {
+                return;
+            }
+
+            if (_userManager.FindByEmailAsync(email).Result == null)
             {
                 UserAccount user = new UserAccount();
-                user.UserName = "admin@localhost";
-                user.Email = "admin@localhost";
-                user.NormalizedUserName = "ADMIN@LOCALHOST";
-                user.NormalizedEmail = "ADMIN@LOCALHOST";
+                user.UserName = email;
+                user.Email = email;
+                user.NormalizedUserName = email.ToUpperInvariant();
+                user.NormalizedEmail = email.ToUpperInvariant();
                 user.EmailConfirmed = true;
                 user.LockoutEnabled = false;
                 user.SecurityStamp = Guid.NewGuid().ToString();
@@ -53,7 +67,7 @@ namespace PROJETO.Services
                 user.Bairro = "Bairro1";
                 user.Cidade = "Ata";
                 user.Cep = 16200000;
-                IdentityResult result = _userManager.CreateAsync(user, "Sesisenai#23").Result;
+                IdentityResult result = _userManager.CreateAsync(user, senha).Result;
 
                 if (result.Succeeded)
                 {

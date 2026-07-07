@@ -1,13 +1,32 @@
 @model Projeto.VewModel.ItemListViewModel
 @{
-    ViewData["Title"] = "Itens";
+    ViewData["Title"] = Model?.CategoriaAtual ?? "Cardápio";
+    var total = Model?.Itens?.Count() ?? 0;
 }
-<h1>@Model.CategoriaAtual</h1>
-<div class="container">
-    <div class="row row-cols-sm-3 row-cols-1">
+
+<div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-4">
+    <div>
+        <span class="eyebrow">Cardápio</span>
+        <h1 class="section-display mt-2 mb-0">@Model.CategoriaAtual</h1>
+    </div>
+    <span class="text-muted">@total @(total == 1 ? "item" : "itens")</span>
+</div>
+
+@if (total > 0)
+{
+    <div class="menu-grid">
         @foreach (var item in Model.Itens)
         {
-            <partial name="_Card" for="@item"></partial>
+            <partial name="_Card" for="@item" />
         }
     </div>
-</div>
+}
+else
+{
+    <div class="empty-state">
+        <div class="ico"><i class="bi bi-search" style="font-size:2rem" aria-hidden="true"></i></div>
+        <h3>Nada encontrado</h3>
+        <p>Não achamos nada por aqui. Que tal ver o cardápio completo?</p>
+        <a class="btn-brand mt-2" asp-controller="Item" asp-action="List">Ver todo o cardápio</a>
+    </div>
+}
